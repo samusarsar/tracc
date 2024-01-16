@@ -17,7 +17,6 @@ export class AppComponent {
   title = 'tracc';
 
   toggleSidenav() {
-    console.log('hit');
     this.sidenavIsOpen = !this.sidenavIsOpen;
   }
 }
