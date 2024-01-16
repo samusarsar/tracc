@@ -1,2 +1,5 @@
-# tracc
-This is a simple and intuitive crypto wallet tracking app.
+# Tracc
+
+## This is a simple and intuitive crypto wallet tracking app.
+
+### WIP
