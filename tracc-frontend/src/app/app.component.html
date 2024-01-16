@@ -1,4 +1,6 @@
 <main class="main">
-  <app-navbar></app-navbar>
-  <router-outlet></router-outlet>
+  <app-navbar #navbar (toggleSidenav)="toggleSidenav()"></app-navbar>
+  <app-sidenav [sidenavIsOpen]="sidenavIsOpen">
+    <router-outlet></router-outlet>
+  </app-sidenav>
 </main>

@@ -1,0 +1,19 @@
+<mat-sidenav-container class="min-h-full">
+  <mat-sidenav #sidenav [opened]="sidenavIsOpen" class="w-full sm:w-[300px]">
+    <ul class="p-4">
+      <li>
+        <button mat-button class="py-2 w-full">
+          <mat-icon>person_outline</mat-icon>Login
+        </button>
+      </li>
+      <li>
+        <button mat-button class="py-2 w-full">
+          <mat-icon>person_add</mat-icon>Signup
+        </button>
+      </li>
+    </ul>
+  </mat-sidenav>
+  <mat-sidenav-content class="min-h-full">
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
