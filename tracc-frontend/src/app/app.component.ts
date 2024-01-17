@@ -12,11 +12,5 @@ import { SidenavComponent } from './navigation/sidenav/sidenav.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  sidenavIsOpen = false;
-
   title = 'tracc';
-
-  toggleSidenav() {
-    this.sidenavIsOpen = !this.sidenavIsOpen;
-  }
 }

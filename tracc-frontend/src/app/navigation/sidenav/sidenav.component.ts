@@ -1,16 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { NavigationService } from './../navigation.service';
+import { Component, Input, ViewChild } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
-import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [MatSidenavModule, MatIconModule, MatButtonModule],
+  imports: [MatSidenavModule, MatIconModule, MatButtonModule, RouterModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
-  @Input() sidenavIsOpen!: boolean;
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+
+  constructor(private navigationService: NavigationService) {
+    this.navigationService.toToggleSidenav.subscribe(() =>
+      this.sidenav.toggle()
+    );
+  }
 }

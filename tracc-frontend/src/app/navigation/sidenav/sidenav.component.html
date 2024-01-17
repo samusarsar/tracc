@@ -1,15 +1,25 @@
 <mat-sidenav-container class="min-h-full">
-  <mat-sidenav #sidenav [opened]="sidenavIsOpen" class="w-full sm:w-[300px]">
+  <mat-sidenav #sidenav class="w-full sm:w-[300px]">
     <ul class="p-4">
       <li>
-        <button mat-button class="py-2 w-full">
+        <a
+          routerLink="/auth/login"
+          mat-button
+          class="py-2 w-full"
+          (click)="sidenav.toggle()"
+        >
           <mat-icon>person_outline</mat-icon>Login
-        </button>
+        </a>
       </li>
       <li>
-        <button mat-button class="py-2 w-full">
+        <a
+          routerLink="/auth/signup"
+          mat-button
+          class="py-2 w-full"
+          (click)="sidenav.toggle()"
+        >
           <mat-icon>person_add</mat-icon>Signup
-        </button>
+        </a>
       </li>
     </ul>
   </mat-sidenav>

@@ -1,6 +1,6 @@
 <main class="main">
-  <app-navbar #navbar (toggleSidenav)="toggleSidenav()"></app-navbar>
-  <app-sidenav [sidenavIsOpen]="sidenavIsOpen">
+  <app-navbar #navbar></app-navbar>
+  <app-sidenav>
     <router-outlet></router-outlet>
   </app-sidenav>
 </main>
