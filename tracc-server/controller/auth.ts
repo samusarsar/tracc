@@ -22,9 +22,9 @@ export const signup = async (
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
 
-        const newUser = await User.create({ ...req.body, password: hash })
+        await User.create({ ...req.body, password: hash })
 
-        res.status(200).json(newUser)
+        login(req, res, next)
     } catch (error) {
         next(error)
     }
@@ -44,7 +44,7 @@ export const login = async (
             return next(createHttpError(404, 'User does not exist'))
 
         const passwordsMatch = await bcrypt.compare(
-            req.body.pasword,
+            req.body.password,
             existingUser.password
         )
 
