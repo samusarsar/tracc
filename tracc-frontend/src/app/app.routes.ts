@@ -9,13 +9,13 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
-    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     loadChildren: () =>
       import('./auth/auth.routes').then((mod) => mod.AUTH_ROUTES),
   },
   {
     path: 'dashboard',
-    canActivate: [authGuard],
+    canActivateChild: [authGuard],
     loadChildren: () =>
       import('./dashboard/dashboard.routes').then(
         (mod) => mod.DASHBOARD_ROUTES
