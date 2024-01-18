@@ -18,6 +18,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from '../store/auth.actions';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -45,7 +46,8 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -71,5 +73,13 @@ export class SignupComponent implements OnInit {
         password: form.value.password,
       })
     );
+  }
+
+  onCancel() {
+    this.router.navigate(['/']);
+  }
+
+  onGoLogin() {
+    this.router.navigate(['/auth/login']);
   }
 }

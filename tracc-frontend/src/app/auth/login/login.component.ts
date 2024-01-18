@@ -18,6 +18,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from '../store/auth.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +46,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromApp.AppState>,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -69,5 +71,13 @@ export class LoginComponent implements OnInit {
         password: form.value.password,
       })
     );
+  }
+
+  onCancel() {
+    this.router.navigate(['/']);
+  }
+
+  onGoSignup() {
+    this.router.navigate(['/auth/signup']);
   }
 }

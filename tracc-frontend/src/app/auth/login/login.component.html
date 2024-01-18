@@ -44,6 +44,18 @@
     <button mat-flat-button color="primary" [disabled]="isLoading">
       LOGIN
     </button>
-    <button mat-button type="button" [disabled]="isLoading">CANCEL</button>
+    <button
+      mat-button
+      type="button"
+      [disabled]="isLoading"
+      (click)="onCancel()"
+    >
+      CANCEL
+    </button>
+  </mat-card-actions>
+  <mat-card-actions align="end">
+    <button mat-button type="button" (click)="onGoSignup()">
+      Create a new account
+    </button>
   </mat-card-actions>
 </form>
