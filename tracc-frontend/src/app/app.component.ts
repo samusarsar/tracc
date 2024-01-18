@@ -1,8 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navigation/navbar/navbar.component';
 import { SidenavComponent } from './navigation/sidenav/sidenav.component';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from './store/app.reducer';
+import * as AuthActions from './auth/store/auth.actions';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +15,12 @@ import { SidenavComponent } from './navigation/sidenav/sidenav.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'tracc';
+
+  constructor(private store: Store<fromApp.AppState>) {}
+
+  ngOnInit() {
+    this.store.dispatch(AuthActions.autoLogin());
+  }
 }

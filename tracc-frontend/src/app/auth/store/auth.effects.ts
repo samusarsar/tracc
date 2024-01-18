@@ -44,4 +44,21 @@ export class AuthEffects {
       })
     );
   });
+
+  autoLogin = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AuthActions.autoLogin),
+      map(() => {
+        const user = JSON.parse(localStorage.getItem('tracc-user') || 'null');
+
+        if (!user) {
+          return {
+            type: 'NO AUTO-LOGIN',
+          };
+        }
+
+        return AuthActions.authSuccess(user);
+      })
+    );
+  });
 }

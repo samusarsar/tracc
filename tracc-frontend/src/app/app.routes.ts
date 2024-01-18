@@ -13,4 +13,12 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./auth/auth.routes').then((mod) => mod.AUTH_ROUTES),
   },
+  {
+    path: 'dashboard',
+    canActivate: [authGuard],
+    loadChildren: () =>
+      import('./dashboard/dashboard.routes').then(
+        (mod) => mod.DASHBOARD_ROUTES
+      ),
+  },
 ];
