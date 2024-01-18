@@ -4,6 +4,7 @@ import createHttpError from 'http-errors'
 import jwt from 'jsonwebtoken'
 
 import User from '../models/User'
+import { UserDocument } from '../common/types'
 
 export const signup = async (
     req: Request,
@@ -28,9 +29,9 @@ export const login = async (
     next: NextFunction
 ) => {
     try {
-        const existingUser = await User.findOne({
+        const existingUser = (await User.findOne({
             username: req.body.username
-        })
+        })) as UserDocument
 
         if (!existingUser)
             return next(createHttpError(404, 'User does not exist'))
