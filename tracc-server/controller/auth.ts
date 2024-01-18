@@ -12,12 +12,19 @@ export const signup = async (
     next: NextFunction
 ) => {
     try {
+        const existingUser = (await User.findOne({
+            email: req.body.email
+        })) as UserDocument
+
+        if (existingUser)
+            return next(createHttpError(404, 'Email is already taken.'))
+
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(req.body.password, salt)
 
-        await User.create({ ...req.body, password: hash })
+        const newUser = await User.create({ ...req.body, password: hash })
 
-        res.status(200).send('User created!')
+        res.status(200).json(newUser)
     } catch (error) {
         next(error)
     }
@@ -30,7 +37,7 @@ export const login = async (
 ) => {
     try {
         const existingUser = (await User.findOne({
-            username: req.body.username
+            email: req.body.email
         })) as UserDocument
 
         if (!existingUser)
