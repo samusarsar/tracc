@@ -6,6 +6,8 @@ export const authSuccess = createAction(
     id: string;
     email: string;
     name: string;
+    redirect?: boolean;
+    token: string;
   }>()
 );
 

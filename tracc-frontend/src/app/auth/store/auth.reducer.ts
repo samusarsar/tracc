@@ -25,12 +25,12 @@ export const authReducer = createReducer(
         id: action.id,
         email: action.email,
         name: action.name,
+        token: action.token,
       },
       loading: false,
     };
   }),
   on(AuthActions.authFail, (state, action) => {
-    console.log('failed');
     return {
       ...state,
       authError: action.error,
