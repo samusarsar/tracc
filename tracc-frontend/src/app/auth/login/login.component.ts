@@ -13,6 +13,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../store/app.reducer';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -31,19 +36,38 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  error!: string;
+  isLoading!: boolean;
 
-  constructor(private fb: FormBuilder) {}
+  passwordHidden = true;
+
+  private authStoreSub!: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    this.authStoreSub = this.store.select('auth').subscribe((state) => {
+      this.isLoading = state.loading;
+      this.error = state.authError;
+    });
   }
 
-  passwordHidden = true;
-
   onSubmit(form: FormGroup) {
-    console.log(form);
+    if (form.status === 'INVALID' || !form.touched) return;
+
+    this.store.dispatch(
+      AuthActions.loginStart({
+        email: form.value.email,
+        password: form.value.password,
+      })
+    );
   }
 }
