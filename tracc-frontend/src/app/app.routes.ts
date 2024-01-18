@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'auth',
+    canActivate: [authGuard],
     loadChildren: () =>
       import('./auth/auth.routes').then((mod) => mod.AUTH_ROUTES),
   },

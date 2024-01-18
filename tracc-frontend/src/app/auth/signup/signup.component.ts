@@ -56,7 +56,6 @@ export class SignupComponent implements OnInit {
     });
 
     this.authStoreSub = this.store.select('auth').subscribe((state) => {
-      console.log(state);
       this.isLoading = state.loading;
       this.error = state.authError;
     });
