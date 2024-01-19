@@ -1,6 +1,6 @@
 <main class="main">
-  <app-navbar #navbar></app-navbar>
-  <app-sidenav>
+  <app-navbar #navbar [user]="user"></app-navbar>
+  <app-sidenav [user]="user">
     <router-outlet></router-outlet>
   </app-sidenav>
 </main>

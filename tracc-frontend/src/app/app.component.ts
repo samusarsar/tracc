@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromApp from './store/app.reducer';
 import * as AuthActions from './auth/store/auth.actions';
+import { UserData } from './shared/types';
 
 @Component({
   selector: 'app-root',
@@ -18,9 +19,14 @@ import * as AuthActions from './auth/store/auth.actions';
 export class AppComponent implements OnInit {
   title = 'tracc';
 
+  user!: UserData | null;
+
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
     this.store.dispatch(AuthActions.autoLogin());
+    this.store.select('auth').subscribe((state) => {
+      this.user = state.user;
+    });
   }
 }

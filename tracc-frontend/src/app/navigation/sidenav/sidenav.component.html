@@ -6,6 +6,7 @@
     autoFocus="false"
   >
     <ul class="p-4">
+      @if (!user) {
       <li>
         <a
           routerLink="/auth/login"
@@ -26,6 +27,38 @@
           <mat-icon>person_add</mat-icon>Signup
         </a>
       </li>
+      } @else {
+      <li>
+        <a
+          routerLink="/dashboard"
+          mat-button
+          class="py-2 w-full"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon>home</mat-icon>Dashboard
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard/explore"
+          mat-button
+          class="py-2 w-full"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon>explore</mat-icon>Explore
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/dashboard/wallets"
+          mat-button
+          class="py-2 w-full"
+          (click)="sidenav.toggle()"
+        >
+          <mat-icon>wallet</mat-icon>Wallets
+        </a>
+      </li>
+      }
     </ul>
   </mat-sidenav>
   <mat-sidenav-content>

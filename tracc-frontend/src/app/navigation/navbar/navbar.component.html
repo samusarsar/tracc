@@ -8,7 +8,39 @@
   </button>
   <span>Tracc</span>
   <span class="nav-spacer"></span>
-  <button mat-mini-fab aria-label="User icon button">
+  @if (!user) {
+  <button
+    mat-raised-button
+    aria-label="Login button"
+    color="accent"
+    (click)="onGoLogin()"
+  >
+    LOGIN
+  </button>
+  } @else {
+  <button
+    mat-mini-fab
+    aria-label="User icon button"
+    [matMenuTriggerFor]="userMenu"
+  >
     <mat-icon>person</mat-icon>
   </button>
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item disableRipple disabled>
+      <div class="flex flex-col">
+        <p>
+          Name: <b>{{ user.name }}</b>
+        </p>
+        <p>
+          Email: <b>{{ user.email }}</b>
+        </p>
+      </div>
+    </button>
+    <div class="px-4 flex w-full justify-center">
+      <button mat-raised-button color="warn" (click)="onLogout()">
+        LOGOUT
+      </button>
+    </div>
+  </mat-menu>
+  }
 </mat-toolbar>
