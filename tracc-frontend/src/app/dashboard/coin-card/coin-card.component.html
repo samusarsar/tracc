@@ -1,0 +1,40 @@
+<mat-card matRipple class="hover:scale-105">
+  <mat-card-header>
+    <div
+      mat-card-avatar
+      [style]="{
+        'background-image': 'url(' + coin.image + ')',
+        'background-size': 'cover'
+      }"
+    ></div>
+    <mat-card-subtitle>{{ coin.symbol | uppercase }}</mat-card-subtitle>
+    <mat-card-title>{{ coin.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider></mat-divider>
+    <div class="grid grid-cols-2 gap-1 p-2 overflow-clip place-items-start">
+      <p class="text-md">Price:</p>
+      <p class="text-md font-semibold">${{ coin.current_price }}</p>
+      <p class="text-md">Market Cap:</p>
+      <p class="text-md font-semibold">${{ coin.market_cap }}</p>
+      <p class="text-md">Total Supply:</p>
+      <p class="text-md font-semibold">${{ coin.total_supply.toFixed(2) }}</p>
+      <p class="text-md">Circulating Supply:</p>
+      <p class="text-md font-semibold">
+        ${{ coin.circulating_supply.toFixed(2) }}
+      </p>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div
+      [class]="
+        'flex justify-center pt-2 ' +
+        (coin.price_change_percentage_24h < 0 ? 'bg-red-500' : 'bg-green-500')
+      "
+    >
+      <p class="text-lg font-semibold">
+        {{ coin.price_change_percentage_24h }}%
+      </p>
+    </div>
+  </mat-card-footer>
+</mat-card>
