@@ -6,7 +6,7 @@ import { catchError, map, of, switchMap, tap } from 'rxjs';
 import Cookies from 'js-cookie';
 
 import * as AuthActions from './auth.actions';
-import { apiRoutes } from '../../shared/api.constants';
+import { apiRoutes } from '../../environments/environment';
 import { AuthResponse } from '../../shared/types';
 
 const handleAuthSuccess = (res: AuthResponse) => {
