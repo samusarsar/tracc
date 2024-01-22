@@ -2,26 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { ActivatedRoute } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatRippleModule } from '@angular/material/core';
-import { UpperCasePipe } from '@angular/common';
 
 import * as AuthActions from '../auth/store/auth.actions';
 import * as fromApp from '../store/app.reducer';
 import { Coin, UserData } from '../shared/types';
-import { CoinCardComponent } from './coin-card/coin-card.component';
+import { CarouselComponent } from '../shared/carousel/carousel.component';
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    MatButtonModule,
-    MatCardModule,
-    UpperCasePipe,
     MatDividerModule,
-    MatRippleModule,
-    CoinCardComponent,
+    MatButtonModule,
+    CarouselComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
