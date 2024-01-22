@@ -1,0 +1,23 @@
+<div #carousel class="flex overflow-hidden gap-4 p-4">
+  @for (coin of coins; track coin.id) {
+  <div class="min-w-[300px]">
+    <app-coin-card [coin]="coin"></app-coin-card>
+  </div>
+  }
+</div>
+<div class="flex justify-between">
+  <button
+    mat-icon-button
+    (click)="scrollCarousel(-300)"
+    [disabled]="leftScrollDisabled"
+  >
+    <mat-icon>arrow_left</mat-icon>
+  </button>
+  <button
+    mat-icon-button
+    (click)="scrollCarousel(300)"
+    [disabled]="rightScrollDisabled"
+  >
+    <mat-icon>arrow_right</mat-icon>
+  </button>
+</div>
