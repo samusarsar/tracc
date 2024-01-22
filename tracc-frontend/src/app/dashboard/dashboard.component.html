@@ -1,20 +1,26 @@
 <div class="min-h-full w-full p-6 sm:p-4 flex flex-col gap-4">
   <p class="text-6xl font-bold">Welcome back, {{ user.name }}!</p>
   <mat-divider></mat-divider>
-  <div class="p-4 flex justify-between items-center">
-    <div class="p-2 rounded bg-blue-800 w-fit flex items-center shadow-lg">
-      <p class="text-3xl">Top Coins:</p>
+  <section>
+    <div class="p-4 flex justify-between items-center">
+      <div class="p-2 rounded bg-blue-800 w-fit flex items-center shadow-lg">
+        <p class="text-3xl">Top Coins:</p>
+      </div>
+      <button mat-raised-button (click)="onNavigate('explore')">
+        Browse all
+      </button>
     </div>
-    <button mat-raised-button>Browse all</button>
-  </div>
-  <app-carousel [coins]="coins"></app-carousel>
-  <div class="p-4 flex justify-between items-center">
-    <div
-      class="mx-4 p-2 rounded bg-purple-800 w-fit flex items-center shadow-lg"
-    >
-      <p class="text-3xl">Trending Coins:</p>
+    <app-carousel [coins]="coins"></app-carousel>
+  </section>
+  <section>
+    <div class="p-4 flex justify-between items-center">
+      <div class="p-2 rounded bg-purple-800 w-fit flex items-center shadow-lg">
+        <p class="text-3xl">Trending Coins:</p>
+      </div>
+      <button mat-raised-button (click)="onNavigate('explore')">
+        Browse all
+      </button>
     </div>
-    <button mat-raised-button>Browse all</button>
-  </div>
-  <app-carousel [coins]="coins"></app-carousel>
+    <app-carousel [coins]="coins"></app-carousel>
+  </section>
 </div>

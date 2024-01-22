@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatDividerModule } from '@angular/material/divider';
 
 import * as AuthActions from '../auth/store/auth.actions';
@@ -12,11 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [
-    MatDividerModule,
-    MatButtonModule,
-    CarouselComponent
-  ],
+  imports: [MatDividerModule, MatButtonModule, CarouselComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })
@@ -26,7 +22,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private store: Store<fromApp.AppState>,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -34,12 +31,10 @@ export class DashboardComponent implements OnInit {
 
     this.activatedRoute.data.subscribe((res) => {
       this.coins = res['coins'];
-      console.log(this.coins);
-      console.log(this.coins[0].price_change_percentage_24h < 0);
     });
   }
 
-  onLogout() {
-    this.store.dispatch(AuthActions.logout());
+  onNavigate(to: string) {
+    this.router.navigate([`/dashboard/${to}`]);
   }
 }
