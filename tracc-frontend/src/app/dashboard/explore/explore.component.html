@@ -1,0 +1,23 @@
+<div class="min-h-full w-full p-6 sm:p-4 flex flex-col gap-4">
+  <p class="text-6xl font-bold">Explore</p>
+  <mat-divider></mat-divider>
+  <div class="p-4 pb-0 flex justify-center">
+    <mat-form-field appearance="outline" class="w-[300px]">
+      <mat-label>Search coins</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Enter coin name or ticker"
+        [ngModel]="searchTerm"
+        (ngModelChange)="handleSearch($event)"
+      />
+    </mat-form-field>
+  </div>
+  <div class="p-4 pt-0 flex justify-center gap-4 flex-wrap">
+    @for(coin of filteredCoins; track coin.id) {
+    <div class="min-w-[300px]">
+      <app-coin-card [coin]="coin"></app-coin-card>
+    </div>
+    }
+  </div>
+</div>
