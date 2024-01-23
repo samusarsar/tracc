@@ -1,0 +1,36 @@
+<form [formGroup]="newWalletForm" (ngSubmit)="onSubmit(newWalletForm)">
+  <h1 mat-dialog-title>Create a new wallet</h1>
+  <div mat-dialog-content style="padding-bottom: 0">
+    <mat-form-field class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="My Wallet" formControlName="name" required />
+      @if (newWalletForm.controls['name'].invalid) {
+      <mat-error>Name is required.</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        placeholder="This is my wallet"
+        formControlName="description"
+      />
+    </mat-form-field>
+    @if (error) {
+    <mat-error>{{ error }}</mat-error>
+    }
+  </div>
+  <div mat-dialog-actions>
+    <div class="flex w-full justify-end gap-2 px-4 pb-4">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="isLoading"
+      >
+        Create
+      </button>
+      <button mat-button mat-dialog-close>Close</button>
+    </div>
+  </div>
+</form>
