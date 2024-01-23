@@ -1,0 +1,83 @@
+<mat-card matRipple class="hover:scale-105 transition">
+  <mat-card-header>
+    <mat-card-title>{{ wallet.name }}</mat-card-title>
+    <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- <div class="grid grid-cols-2 gap-1 p-2 overflow-clip place-items-start"> -->
+    <!-- @for (transaction of wallet.transactions; track transaction.id) {
+      <p class="text-md">{{ transaction.coinId }}</p>
+      <p class="text-md font-semibold">{{ getTransactionPNL(transaction) }}%</p>
+      } -->
+    <table mat-table [dataSource]="wallet.transactions.slice(0, 3)">
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef>Coin</th>
+        <td mat-cell *matCellDef="let element">{{ element.coinId }}</td>
+      </ng-container>
+      <ng-container matColumnDef="pnlp">
+        <th mat-header-cell *matHeaderCellDef>PnL (%)</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [class]="
+            getTransactionPNL(element).percentage < 0
+              ? 'text-red-300'
+              : 'text-green-300'
+          "
+        >
+          {{ getTransactionPNL(element).percentage.toFixed(2) }}%
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="pnln">
+        <th mat-header-cell *matHeaderCellDef>PnL ($)</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [class]="
+            getTransactionPNL(element).nominal < 0
+              ? 'text-red-300'
+              : 'text-green-300'
+          "
+        >
+          ${{ getTransactionPNL(element).nominal.toFixed(2) }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['position', 'pnlp', 'pnln']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['position', 'pnlp', 'pnln']"
+      ></tr>
+
+      @if (wallet.transactions.length > 3) {
+      <ng-container matColumnDef="disclaimer">
+        <td mat-footer-cell *matFooterCellDef colspan="3">
+          Click to view all...
+        </td>
+      </ng-container>
+
+      <tr mat-footer-row *matFooterRowDef="['disclaimer']"></tr>
+      }
+    </table>
+    <!-- </div> -->
+  </mat-card-content>
+  <mat-card-footer>
+    <div
+      [class]="
+        'flex justify-between pt-2 px-8 ' +
+        (getWalletPNL().percentage < 0 ? 'bg-red-500' : 'bg-green-500')
+      "
+    >
+      <p class="text-lg font-semibold">
+        {{ getWalletPNL().percentage.toFixed(2) }}%
+      </p>
+      <mat-icon
+        >keyboard_arrow_{{
+          getWalletPNL().percentage < 0 ? "down" : "up"
+        }}</mat-icon
+      >
+      <p class="text-lg font-semibold">
+        ${{ getWalletPNL().nominal.toFixed(2) }}
+      </p>
+    </div>
+  </mat-card-footer>
+</mat-card>

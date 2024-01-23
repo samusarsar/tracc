@@ -22,3 +22,19 @@ export type Coin = {
   circulating_supply: number;
   total_supply: number;
 };
+
+export type Transaction = {
+  id: string,
+  coinId: string;
+  buyPrice: number;
+  buyAmount: number;
+  createdAt: Date;
+};
+
+export type Wallet = {
+  id: string;
+  name: string;
+  description: string;
+  transactions: Transaction[];
+  createdAt: Date;
+};
