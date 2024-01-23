@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { coinApiEndpoints } from '../environments/environment';
 import { of } from 'rxjs';
 
-export const dashboardResolver: ResolveFn<Object> = () => {
+export const dashboardCoinsResolver: ResolveFn<Object> = () => {
   // const allCoins = inject(HttpClient).get(coinApiEndpoints.MARKET_TOP_100);
 
   // mock allCoins

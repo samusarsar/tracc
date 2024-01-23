@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { authGuard } from './auth/auth.guard';
-import { dashboardResolver } from './dashboard/dashboard.resolver';
+import { dashboardCoinsResolver } from './dashboard/dashboard.coins.resolver';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { dashboardUserResolver } from './dashboard/dashboard.user.resolver';
 
 export const routes: Routes = [
   {
@@ -17,10 +19,11 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     canActivateChild: [authGuard],
+    component: DashboardComponent,
     loadChildren: () =>
       import('./dashboard/dashboard.routes').then(
         (mod) => mod.DASHBOARD_ROUTES
       ),
-    resolve: { coins: dashboardResolver },
+    resolve: { coins: dashboardCoinsResolver, user: dashboardUserResolver },
   },
 ];
