@@ -2,9 +2,11 @@ import express, { NextFunction, Request, Response } from 'express'
 import { HttpError } from 'http-errors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
-import authRoutes from './routes/auth'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+
+import walletsRoutes from './routes/wallets'
+import authRoutes from './routes/auth'
 
 const app = express()
 dotenv.config()
@@ -29,6 +31,7 @@ app.use(
 app.use(cookieParser())
 app.use(express.json())
 app.use('/api/auth', authRoutes)
+app.use('/api/wallets', walletsRoutes)
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
     const status = err.status || 500
