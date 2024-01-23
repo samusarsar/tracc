@@ -1,0 +1,22 @@
+<section>
+  <div class="p-4 flex justify-between items-center">
+    <div class="p-2 rounded bg-blue-800 w-fit flex items-center shadow-lg">
+      <p class="text-3xl">Top Coins:</p>
+    </div>
+    <button mat-raised-button (click)="onNavigate('explore')">
+      Browse all
+    </button>
+  </div>
+  <app-carousel [coins]="topCoins"></app-carousel>
+</section>
+<section>
+  <div class="p-4 flex justify-between items-center">
+    <div class="p-2 rounded bg-purple-800 w-fit flex items-center shadow-lg">
+      <p class="text-3xl">Trending Coins:</p>
+    </div>
+    <button mat-raised-button (click)="onNavigate('explore')">
+      Browse all
+    </button>
+  </div>
+  <app-carousel [coins]="trendingCoins"></app-carousel>
+</section>
