@@ -1,4 +1,7 @@
-<div class="p-4 pb-0 flex justify-center">
+<div class="px-4 flex flex-col items-center gap-6">
+  <div class="flex justify-center items-center">
+    <button mat-raised-button (click)="onOpenDialog()">Create Wallet</button>
+  </div>
   <div class="p-4 pt-0 flex justify-center gap-4 flex-wrap">
     @for(wallet of wallets; track wallet.id) {
     <div class="min-w-[300px]">

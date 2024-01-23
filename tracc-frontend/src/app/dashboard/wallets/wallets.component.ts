@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Coin } from '../../shared/types';
 import { WalletCardComponent } from '../../shared/wallet-card/wallet-card.component';
+import { CreateWalletComponent } from '../../shared/dialogs/create-wallet/create-wallet.component';
 
 @Component({
   selector: 'app-wallets',
   standalone: true,
-  imports: [WalletCardComponent],
+  imports: [MatButtonModule, WalletCardComponent],
   templateUrl: './wallets.component.html',
   styleUrl: './wallets.component.scss',
 })
@@ -82,11 +85,18 @@ export class WalletsComponent implements OnInit {
     },
   ];
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.parent?.data.subscribe((res) => {
       this.coins = res['coins']['all'];
     });
+  }
+
+  onOpenDialog() {
+    this.dialog.open(CreateWalletComponent);
   }
 }
