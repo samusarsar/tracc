@@ -1,1 +1,9 @@
-<p>wallets works!</p>
+<div class="p-4 pb-0 flex justify-center">
+  <div class="p-4 pt-0 flex justify-center gap-4 flex-wrap">
+    @for(wallet of wallets; track wallet.id) {
+    <div class="min-w-[300px]">
+      <app-wallet-card [wallet]="wallet" [coins]="coins"></app-wallet-card>
+    </div>
+    }
+  </div>
+</div>
