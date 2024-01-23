@@ -1,1 +1,23 @@
-<div>landing-page works!</div>
+<div class="flex flex-col min-h-full justify-center items-center p-4">
+  <div class="rounded p-8 shadow-xl bg-[#212121]">
+    <p class="text-9xl">Tracc</p>
+    <p class="text-4xl">Your all-in-one crypto tracking app</p>
+    @if (user === null) {
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="onNavigate('/auth/login')"
+    >
+      LOGIN
+    </button>
+    } @else {
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onNavigate('/dashboard')"
+    >
+      ENTER TRACC
+    </button>
+    }
+  </div>
+</div>
