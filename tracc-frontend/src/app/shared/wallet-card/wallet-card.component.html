@@ -63,11 +63,11 @@
   <mat-card-footer>
     <div
       [class]="
-        'flex justify-between pt-2 px-8 ' +
+        'flex justify-between items-center p-2 px-8 ' +
         (getWalletPNL().percentage < 0 ? 'bg-red-500' : 'bg-green-500')
       "
     >
-      <p class="text-lg font-semibold">
+      <p class="text-lg font-semibold" style="margin-bottom: 0">
         {{ getWalletPNL().percentage.toFixed(2) }}%
       </p>
       <mat-icon
@@ -75,7 +75,7 @@
           getWalletPNL().percentage < 0 ? "down" : "up"
         }}</mat-icon
       >
-      <p class="text-lg font-semibold">
+      <p class="text-lg font-semibold" style="margin-bottom: 0">
         ${{ getWalletPNL().nominal.toFixed(2) }}
       </p>
     </div>

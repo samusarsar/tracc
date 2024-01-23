@@ -28,7 +28,7 @@
   <mat-card-footer>
     <div
       [class]="
-        'flex justify-center pt-2 ' +
+        'flex justify-center items-center p-2 ' +
         (coin.price_change_percentage_24h < 0 ? 'bg-red-500' : 'bg-green-500')
       "
     >
@@ -37,7 +37,7 @@
           coin.price_change_percentage_24h < 0 ? "down" : "up"
         }}</mat-icon
       >
-      <p class="text-lg font-semibold m-0">
+      <p class="text-lg font-semibold m-0" style="margin-bottom: 0">
         {{ coin.price_change_percentage_24h }}%
       </p>
     </div>
