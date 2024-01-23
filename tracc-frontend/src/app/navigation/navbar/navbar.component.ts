@@ -32,8 +32,8 @@ export class NavbarComponent {
     this.navigationService.toggleSidenav();
   }
 
-  onGoLogin() {
-    this.router.navigate(['/auth/login']);
+  onNavigate(to: string) {
+    this.router.navigate([to]);
   }
 
   onLogout() {
