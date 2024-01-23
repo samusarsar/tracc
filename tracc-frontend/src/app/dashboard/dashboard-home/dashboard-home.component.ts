@@ -17,6 +17,75 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class DashboardHomeComponent implements OnInit {
   topCoins!: Coin[];
   trendingCoins!: Coin[];
+  allCoins!: Coin[];
+  wallets = [
+    {
+      id: 'sdad1',
+      name: 'My Wallet',
+      description: 'This is my wallet',
+      transactions: [
+        {
+          id: '1',
+          coinId: 'bitcoin',
+          buyPrice: 80000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+        {
+          id: '2',
+          coinId: 'bitcoin',
+          buyPrice: 40000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+      ],
+      createdAt: new Date(),
+    },
+    {
+      id: 'sdad1',
+      name: 'My Wallet',
+      description: 'This is my wallet',
+      transactions: [
+        {
+          id: '1',
+          coinId: 'bitcoin',
+          buyPrice: 80000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+        {
+          id: '2',
+          coinId: 'bitcoin',
+          buyPrice: 40000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+      ],
+      createdAt: new Date(),
+    },
+    {
+      id: 'sdad1',
+      name: 'My Wallet',
+      description: 'This is my wallet',
+      transactions: [
+        {
+          id: '1',
+          coinId: 'bitcoin',
+          buyPrice: 80000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+        {
+          id: '2',
+          coinId: 'bitcoin',
+          buyPrice: 40000,
+          buyAmount: 1,
+          createdAt: new Date(),
+        },
+      ],
+      createdAt: new Date(),
+    },
+  ];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
@@ -24,6 +93,7 @@ export class DashboardHomeComponent implements OnInit {
     this.activatedRoute.data.subscribe((res) => {
       this.topCoins = res['coins']['top'];
       this.trendingCoins = res['coins']['trending'];
+      this.allCoins = res['coins']['all'];
     });
   }
 
