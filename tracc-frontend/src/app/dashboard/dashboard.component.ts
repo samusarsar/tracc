@@ -17,7 +17,8 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  coins!: Coin[];
+  topCoins!: Coin[];
+  trendingCoins!: Coin[];
   user!: UserData;
 
   constructor(
@@ -30,7 +31,9 @@ export class DashboardComponent implements OnInit {
     this.store.select('auth').subscribe((state) => (this.user = state.user!));
 
     this.activatedRoute.data.subscribe((res) => {
-      this.coins = res['coins'];
+      console.log(res['coins']);
+      this.topCoins = res['coins']['top'];
+      this.trendingCoins = res['coins']['trending'];
     });
   }
 

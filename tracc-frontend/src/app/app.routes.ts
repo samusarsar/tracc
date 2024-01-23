@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { authGuard } from './auth/auth.guard';
+import { dashboardResolver } from './dashboard/dashboard.resolver';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,6 @@ export const routes: Routes = [
       import('./dashboard/dashboard.routes').then(
         (mod) => mod.DASHBOARD_ROUTES
       ),
+    resolve: { coins: dashboardResolver },
   },
 ];

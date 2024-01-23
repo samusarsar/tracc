@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Coin } from '../../shared/types';
 import { CoinCardComponent } from '../../shared/coin-card/coin-card.component';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -34,7 +33,7 @@ export class ExploreComponent {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((res) => {
-      this.coins = res['coins'];
+      this.coins = res['coins']['all'];
       this.filteredCoins = this.coins;
     });
   }

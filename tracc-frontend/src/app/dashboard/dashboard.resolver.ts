@@ -6,7 +6,10 @@ import { coinApiEndpoints } from '../environments/environment';
 import { of } from 'rxjs';
 
 export const dashboardResolver: ResolveFn<Object> = () => {
-  return of([
+  // const allCoins = inject(HttpClient).get(coinApiEndpoints.MARKET_TOP_100);
+
+  // mock allCoins
+  const allCoins = [
     {
       id: 'bitcoin',
       symbol: 'btc',
@@ -185,6 +188,15 @@ export const dashboardResolver: ResolveFn<Object> = () => {
       roi: null,
       last_updated: '2024-01-19T14:05:08.849Z',
     },
-  ]);
-  return inject(HttpClient).get(coinApiEndpoints.MARKET_TOP_TEN);
+  ];
+
+  return of({
+    all: allCoins,
+    top: allCoins.slice(0, 6),
+    trending: allCoins
+      .sort(
+        (a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h
+      )
+      .slice(0, 6),
+  });
 };
