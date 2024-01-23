@@ -4,24 +4,30 @@ import {
   Component,
   ElementRef,
   Input,
-  OnChanges,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { Coin } from '../types';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
+import { Coin, Wallet } from '../types';
 import { CoinCardComponent } from '../coin-card/coin-card.component';
+import { WalletCardComponent } from '../wallet-card/wallet-card.component';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule, CoinCardComponent],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    CoinCardComponent,
+    WalletCardComponent,
+  ],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
 })
 export class CarouselComponent implements AfterViewInit {
   @Input() coins!: Coin[];
+  @Input() wallets!: Wallet[];
   @ViewChild('carousel', { static: false }) carousel!: ElementRef;
 
   scrollLeft = 0;
