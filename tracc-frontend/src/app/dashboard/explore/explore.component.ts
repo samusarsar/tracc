@@ -32,7 +32,8 @@ export class ExploreComponent {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((res) => {
+    this.activatedRoute.parent?.data.subscribe((res) => {
+      console.log(res);
       this.coins = res['coins']['all'];
       this.filteredCoins = this.coins;
     });
