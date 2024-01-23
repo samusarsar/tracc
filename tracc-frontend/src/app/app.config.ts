@@ -11,6 +11,8 @@ import { provideStore } from '@ngrx/store';
 import { routes } from './app.routes';
 import { authReducer } from './auth/store/auth.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
+import { walletsReducer } from './dashboard/wallets/store/wallets.reducer';
+import { WalletsEffects } from './dashboard/wallets/store/wallets.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,8 +23,9 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(),
     provideStore({
       auth: authReducer,
+      wallets: walletsReducer,
     }),
-    provideEffects([AuthEffects]),
+    provideEffects([AuthEffects, WalletsEffects]),
     provideHttpClient(withFetch()),
   ],
 };
