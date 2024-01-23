@@ -5,6 +5,25 @@
     role="navigation"
     autoFocus="false"
   >
+    <div
+      class="flex w-full h-[64px] bg-[#212121] justify-center items-center relative"
+    >
+      <p
+        class="text-xl hover:cursor-pointer"
+        style="margin: 0"
+        routerLink=""
+        (click)="sidenav.toggle()"
+      >
+        Tracc
+      </p>
+      <button
+        mat-icon-button
+        style="position: absolute; right: 0"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
     <ul class="p-4">
       @if (!user) {
       <li>
