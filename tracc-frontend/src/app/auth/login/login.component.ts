@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -35,7 +35,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   error!: string;
   isLoading!: boolean;
@@ -60,6 +60,10 @@ export class LoginComponent implements OnInit {
       this.isLoading = state.loading;
       this.error = state.authError;
     });
+  }
+
+  ngOnDestroy() {
+    this.authStoreSub.unsubscribe();
   }
 
   onSubmit(form: FormGroup) {
