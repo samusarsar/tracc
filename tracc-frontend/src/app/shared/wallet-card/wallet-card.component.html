@@ -1,4 +1,8 @@
-<mat-card matRipple class="hover:scale-105 transition">
+<mat-card
+  matRipple
+  class="hover:scale-105 transition"
+  (click)="onViewDetails()"
+>
   <mat-card-header style="padding-bottom: 10px">
     <div class="flex justify-between items-center w-full">
       <div>
@@ -6,7 +10,11 @@
         <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
       </div>
       <div>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          (click)="$event.stopPropagation()"
+        >
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">

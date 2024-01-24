@@ -11,6 +11,9 @@ import { Store } from '@ngrx/store';
 import { Coin, Transaction, Wallet } from '../types';
 import * as fromApp from '../../store/app.reducer';
 import * as WalletsActions from './../../dashboard/wallets/store/wallets.actions';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateWalletComponent } from '../dialogs/create-wallet/create-wallet.component';
+import { WalletDetailsComponent } from '../dialogs/wallet-details/wallet-details.component';
 
 @Component({
   selector: 'app-wallet-card',
@@ -31,7 +34,10 @@ export class WalletCardComponent {
   @Input() wallet!: Wallet;
   @Input() coins!: Coin[];
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private dialog: MatDialog
+  ) {}
 
   getTransactionPNL(transaction: Transaction) {
     const pnl =
@@ -75,7 +81,13 @@ export class WalletCardComponent {
     }
   }
 
-  onEdit() {}
+  onViewDetails() {
+    this.dialog.open(WalletDetailsComponent, { data: this.wallet });
+  }
+
+  onEdit() {
+    this.dialog.open(CreateWalletComponent, { data: this.wallet });
+  }
 
   onDelete() {
     this.store.dispatch(
