@@ -24,7 +24,7 @@ export type Coin = {
 };
 
 export type Transaction = {
-  id: string,
+  id: string;
   coinId: string;
   buyPrice: number;
   buyAmount: number;
@@ -35,6 +35,7 @@ export type Wallet = {
   id: string;
   name: string;
   description: string;
+  owner: string;
   transactions: Transaction[];
   createdAt: Date;
 };

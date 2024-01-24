@@ -28,10 +28,26 @@ export const walletsReducer = createReducer(
     return {
       ...state,
       wallets: [...state.wallets, action],
+      walletError: '',
       loading: false,
     };
   }),
-  on(WalletsActions.createWalletFail, (state, action) => {
+  on(WalletsActions.getWalletsStart, (state) => {
+    return {
+      ...state,
+      walletError: '',
+      loading: true,
+    };
+  }),
+  on(WalletsActions.getWalletsSuccess, (state, action) => {
+    return {
+      ...state,
+      wallets: action.wallets,
+      walletError: '',
+      loading: false,
+    };
+  }),
+  on(WalletsActions.walletsFail, (state, action) => {
     return {
       ...state,
       walletError: action.error,
