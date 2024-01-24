@@ -1,0 +1,14 @@
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  opacity: 0.75;
+  transition: all;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600;
+}
