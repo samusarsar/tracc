@@ -75,7 +75,9 @@
       @if (wallet.transactions.length > 3) {
       <ng-container matColumnDef="disclaimer">
         <td mat-footer-cell *matFooterCellDef colspan="3">
-          Click to view all...
+          <div class="flex justify-center items-center">
+            <button mat-flat-button>Click to view all</button>
+          </div>
         </td>
       </ng-container>
 

@@ -82,7 +82,12 @@ export class WalletCardComponent {
   }
 
   onViewDetails() {
-    this.dialog.open(WalletDetailsComponent, { data: this.wallet });
+    this.dialog.open(WalletDetailsComponent, {
+      data: {
+        walletId: this.wallet.id,
+        coins: this.coins,
+      },
+    });
   }
 
   onEdit() {
