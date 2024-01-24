@@ -6,6 +6,7 @@ import { UpperCasePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 import { Coin } from '../../shared/types';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coin-card',
@@ -22,4 +23,12 @@ import { Coin } from '../../shared/types';
 })
 export class CoinCardComponent {
   @Input() coin!: Coin;
+
+  constructor(private router: Router) {}
+
+  onNavigate() {
+    window.open(
+      `https://www.coingecko.com/en/coins/${this.coin.name.toLowerCase()}`
+    );
+  }
 }
