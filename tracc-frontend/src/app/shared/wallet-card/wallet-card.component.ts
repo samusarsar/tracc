@@ -4,13 +4,26 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { Store } from '@ngrx/store';
 
 import { Coin, Transaction, Wallet } from '../types';
+import * as fromApp from '../../store/app.reducer';
+import * as WalletsActions from './../../dashboard/wallets/store/wallets.actions';
 
 @Component({
   selector: 'app-wallet-card',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatTableModule, MatRippleModule, MatDividerModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTableModule,
+    MatRippleModule,
+    MatDividerModule,
+  ],
   templateUrl: './wallet-card.component.html',
   styleUrl: './wallet-card.component.scss',
 })
@@ -18,7 +31,7 @@ export class WalletCardComponent {
   @Input() wallet!: Wallet;
   @Input() coins!: Coin[];
 
-  constructor() {}
+  constructor(private store: Store<fromApp.AppState>) {}
 
   getTransactionPNL(transaction: Transaction) {
     const pnl =
@@ -60,5 +73,13 @@ export class WalletCardComponent {
         nominal: 0,
       };
     }
+  }
+
+  onEdit() {}
+
+  onDelete() {
+    this.store.dispatch(
+      WalletsActions.deleteWalletStart({ id: this.wallet.id })
+    );
   }
 }
