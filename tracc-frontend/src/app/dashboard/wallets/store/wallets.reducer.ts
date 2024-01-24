@@ -88,5 +88,25 @@ export const walletsReducer = createReducer(
       walletError: '',
       loading: false,
     };
+  }),
+  on(WalletsActions.createTransactionStart, (state) => {
+    return {
+      ...state,
+      walletError: '',
+      loading: true,
+    };
+  }),
+  on(WalletsActions.createTransactionSuccess, (state, action) => {
+    return {
+      ...state,
+      wallets: state.wallets.map((w) => {
+        if (w.id === action.walletId) {
+          return action.updatedWallet;
+        }
+        return w;
+      }),
+      walletError: '',
+      loading: false,
+    };
   })
 );

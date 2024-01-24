@@ -24,10 +24,11 @@ export type Coin = {
 };
 
 export type Transaction = {
-  id: string;
+  _id: string;
   coinId: string;
   buyPrice: number;
   buyAmount: number;
+  buyDate: Date;
   createdAt: Date;
 };
 

@@ -5,7 +5,7 @@ import { catchError, map, of, switchMap } from 'rxjs';
 
 import * as WalletsActions from './wallets.actions';
 import { apiRoutes } from '../../../environments/environment';
-import { Wallet } from '../../../shared/types';
+import { Transaction, Wallet } from '../../../shared/types';
 
 @Injectable({ providedIn: 'root' })
 export class WalletsEffects {
@@ -101,6 +101,38 @@ export class WalletsEffects {
                 id: editAction.id,
                 name: editAction.name,
                 description: editAction.description,
+              });
+            }),
+            catchError((error) => {
+              return of(
+                WalletsActions.walletsFail({ error: error.error.message })
+              );
+            })
+          );
+      })
+    );
+  });
+
+  createTransaction = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WalletsActions.createTransactionStart),
+      switchMap((createAction) => {
+        return this.http
+          .post<Wallet>(
+            apiRoutes.BASE +
+              apiRoutes.WALLET_ID_REQUESTS(createAction.walletId),
+            {
+              coinId: createAction.coinId,
+              buyPrice: createAction.buyPrice,
+              buyAmount: createAction.buyAmount,
+              buyDate: createAction.buyDate,
+            }
+          )
+          .pipe(
+            map((res) => {
+              return WalletsActions.createTransactionSuccess({
+                walletId: createAction.walletId,
+                updatedWallet: { ...res, id: res._id },
               });
             }),
             catchError((error) => {

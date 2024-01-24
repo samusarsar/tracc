@@ -65,3 +65,38 @@ export const editWalletSuccess = createAction(
     description: string;
   }>()
 );
+
+export const createTransactionStart = createAction(
+  '[Wallets] Create Transaction Start',
+  props<{
+    walletId: string;
+    coinId: string;
+    buyPrice: number;
+    buyAmount: number;
+    buyDate: Date;
+  }>()
+);
+
+export const createTransactionSuccess = createAction(
+  '[Wallets] Create Transaction Success',
+  props<{
+    walletId: string;
+    updatedWallet: Wallet;
+  }>()
+);
+
+export const deleteTransactionStart = createAction(
+  '[Wallets] Delete Transaction Start',
+  props<{
+    walletId: string;
+    transactionId: string;
+  }>()
+);
+
+export const deleteTransactionSuccess = createAction(
+  '[Wallets] Delete Transaction Success',
+  props<{
+    walletId: string;
+    transactionId: string;
+  }>()
+);
