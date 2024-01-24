@@ -77,8 +77,8 @@ export const createTransactionStart = createAction(
   }>()
 );
 
-export const createTransactionSuccess = createAction(
-  '[Wallets] Create Transaction Success',
+export const transactionActionSuccess = createAction(
+  '[Wallets] Transaction Action Success',
   props<{
     walletId: string;
     updatedWallet: Wallet;
@@ -87,14 +87,6 @@ export const createTransactionSuccess = createAction(
 
 export const deleteTransactionStart = createAction(
   '[Wallets] Delete Transaction Start',
-  props<{
-    walletId: string;
-    transactionId: string;
-  }>()
-);
-
-export const deleteTransactionSuccess = createAction(
-  '[Wallets] Delete Transaction Success',
   props<{
     walletId: string;
     transactionId: string;

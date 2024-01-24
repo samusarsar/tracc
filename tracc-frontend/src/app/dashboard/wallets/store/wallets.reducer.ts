@@ -96,7 +96,7 @@ export const walletsReducer = createReducer(
       loading: true,
     };
   }),
-  on(WalletsActions.createTransactionSuccess, (state, action) => {
+  on(WalletsActions.transactionActionSuccess, (state, action) => {
     return {
       ...state,
       wallets: state.wallets.map((w) => {

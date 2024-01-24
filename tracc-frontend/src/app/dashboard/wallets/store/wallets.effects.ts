@@ -130,8 +130,37 @@ export class WalletsEffects {
           )
           .pipe(
             map((res) => {
-              return WalletsActions.createTransactionSuccess({
+              return WalletsActions.transactionActionSuccess({
                 walletId: createAction.walletId,
+                updatedWallet: { ...res, id: res._id },
+              });
+            }),
+            catchError((error) => {
+              return of(
+                WalletsActions.walletsFail({ error: error.error.message })
+              );
+            })
+          );
+      })
+    );
+  });
+
+  deleteTransaction = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WalletsActions.deleteTransactionStart),
+      switchMap((deleteAction) => {
+        return this.http
+          .put<Wallet>(
+            apiRoutes.BASE +
+              apiRoutes.WALLET_ID_REQUESTS(deleteAction.walletId),
+            {
+              id: deleteAction.transactionId,
+            }
+          )
+          .pipe(
+            map((res) => {
+              return WalletsActions.transactionActionSuccess({
+                walletId: deleteAction.walletId,
                 updatedWallet: { ...res, id: res._id },
               });
             }),
