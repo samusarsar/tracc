@@ -59,7 +59,7 @@ export const deleteWallet = async (
 ) => {
     try {
         await Wallet.deleteOne({
-            id: req.params.id
+            _id: req.params.id
         })
 
         res.status(200).json('Wallet deleted')
