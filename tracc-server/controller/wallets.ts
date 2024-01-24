@@ -2,6 +2,22 @@ import { NextFunction, Request, Response } from 'express'
 
 import Wallet from '../models/Wallet'
 
+export const getWallets = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const wallets = await Wallet.find({
+            owner: req.params.email
+        })
+
+        res.status(200).json(wallets)
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const createWallet = async (
     req: Request,
     res: Response,

@@ -4,11 +4,13 @@ import {
     deleteWallet,
     addTransaction,
     deleteTransaction,
-    editWallet
+    editWallet,
+    getWallets
 } from '../controller/wallets'
 
 const router = express.Router()
 
+router.get('/:email', getWallets)
 router.post('/create', createWallet)
 router.delete('/:id', deleteWallet)
 router.post('/:id', addTransaction)

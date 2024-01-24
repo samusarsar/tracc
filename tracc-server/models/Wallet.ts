@@ -32,6 +32,10 @@ const WalletSchema = new mongoose.Schema(
             type: String,
             default: ''
         },
+        owner: {
+            type: String,
+            required: true
+        },
         transactions: [
             {
                 type: TransactionSchema
