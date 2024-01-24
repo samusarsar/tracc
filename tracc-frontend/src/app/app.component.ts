@@ -13,7 +13,13 @@ import { UserData } from './shared/types';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MatProgressSpinnerModule,CommonModule, RouterOutlet, NavbarComponent, SidenavComponent],
+  imports: [
+    MatProgressSpinnerModule,
+    CommonModule,
+    RouterOutlet,
+    NavbarComponent,
+    SidenavComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 
@@ -13,6 +13,7 @@ import { authReducer } from './auth/store/auth.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
 import { walletsReducer } from './dashboard/wallets/store/wallets.reducer';
 import { WalletsEffects } from './dashboard/wallets/store/wallets.effects';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,5 +28,7 @@ export const appConfig: ApplicationConfig = {
     }),
     provideEffects([AuthEffects, WalletsEffects]),
     provideHttpClient(withFetch()),
+    importProvidersFrom(MatNativeDateModule),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
 };
