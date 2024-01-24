@@ -101,11 +101,13 @@ export class WalletDetailsComponent implements OnInit {
       return {
         percentage: weightedPNL,
         nominal: totalPNL,
+        total: totalInvested,
       };
     } else {
       return {
         percentage: 0,
         nominal: 0,
+        total: 0,
       };
     }
   }

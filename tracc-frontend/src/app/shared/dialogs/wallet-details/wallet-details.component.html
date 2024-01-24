@@ -3,7 +3,7 @@
   <p class="text-lg" style="margin-bottom: 0">
     {{ wallet.description }}
   </p>
-  <div class="flex gap-2 p-2 w-full justify-center">
+  <div class="flex gap-2 p-2 w-full justify-center flex-wrap">
     <mat-chip-option
       [color]="
         getWalletPNL().percentage < 0
@@ -27,6 +27,12 @@
       highlighted
       selectable="false"
       >$ {{ getWalletPNL().nominal.toFixed(2) }}</mat-chip-option
+    >
+    <mat-chip-option selectable="false"
+      ><b>Total:</b> $ {{ getWalletPNL().total.toFixed(2) }}</mat-chip-option
+    >
+    <mat-chip-option selectable="false"
+      ><b>Transactions:</b> {{ wallet.transactions.length }}</mat-chip-option
     >
   </div>
   <mat-divider></mat-divider>
@@ -99,7 +105,9 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button mat-icon-button (click)="deleteTransaction(element._id)"><mat-icon>remove</mat-icon></button>
+            <button mat-icon-button (click)="deleteTransaction(element._id)">
+              <mat-icon>remove</mat-icon>
+            </button>
           </td>
         </ng-container>
         <tr
