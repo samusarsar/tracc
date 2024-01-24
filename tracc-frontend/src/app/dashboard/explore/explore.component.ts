@@ -3,11 +3,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { take } from 'rxjs';
 
 import { Coin } from '../../shared/types';
 import { CoinCardComponent } from '../../shared/coin-card/coin-card.component';
-import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-explore',
@@ -32,7 +33,7 @@ export class ExploreComponent {
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
-    this.activatedRoute.parent?.data.subscribe((res) => {
+    this.activatedRoute.parent?.data.pipe(take(1)).subscribe((res) => {
       this.coins = res['coins']['all'];
       this.filteredCoins = this.coins;
     });

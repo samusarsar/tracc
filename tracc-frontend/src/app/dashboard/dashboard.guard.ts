@@ -1,4 +1,4 @@
-import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { inject } from '@angular/core';
 

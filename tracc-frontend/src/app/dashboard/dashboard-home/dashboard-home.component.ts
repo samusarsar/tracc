@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Coin, Wallet } from '../../shared/types';
 import { CarouselComponent } from '../../shared/carousel/carousel.component';
 import * as fromApp from '../../store/app.reducer';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -14,11 +15,12 @@ import * as fromApp from '../../store/app.reducer';
   templateUrl: './dashboard-home.component.html',
   styleUrl: './dashboard-home.component.scss',
 })
-export class DashboardHomeComponent implements OnInit {
+export class DashboardHomeComponent implements OnInit, OnDestroy {
   topCoins!: Coin[];
   trendingCoins!: Coin[];
   allCoins!: Coin[];
   wallets!: Wallet[];
+  walletStoreSub!: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,15 +29,19 @@ export class DashboardHomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((res) => {
+    this.activatedRoute.data.pipe(take(1)).subscribe((res) => {
       this.topCoins = res['coins']['top'];
       this.trendingCoins = res['coins']['trending'];
       this.allCoins = res['coins']['all'];
     });
 
-    this.store.select('wallets').subscribe((state) => {
+    this.walletStoreSub = this.store.select('wallets').subscribe((state) => {
       this.wallets = state.wallets;
     });
+  }
+
+  ngOnDestroy() {
+    this.walletStoreSub.unsubscribe();
   }
 
   onNavigate(to: string) {

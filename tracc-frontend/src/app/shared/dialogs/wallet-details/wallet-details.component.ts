@@ -1,4 +1,4 @@
-import { Component, Inject, Injector, OnInit } from '@angular/core';
+import { Component, Inject, Injector, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -21,6 +21,7 @@ import * as fromApp from '../../../store/app.reducer';
 import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
 import { Coin, Transaction, Wallet } from '../../types';
 import { CreateTransactionComponent } from '../create-transaction/create-transaction.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wallet-details',
@@ -43,8 +44,9 @@ import { CreateTransactionComponent } from '../create-transaction/create-transac
   templateUrl: './wallet-details.component.html',
   styleUrl: './wallet-details.component.scss',
 })
-export class WalletDetailsComponent implements OnInit {
+export class WalletDetailsComponent implements OnInit, OnDestroy {
   wallet!: Wallet;
+  walletStoreSub!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -55,9 +57,13 @@ export class WalletDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.store.select('wallets').subscribe((state) => {
+    this.walletStoreSub = this.store.select('wallets').subscribe((state) => {
       this.wallet = state.wallets.find((w) => w.id === this.data.walletId)!;
     });
+  }
+
+  ngOnDestroy() {
+      this.walletStoreSub.unsubscribe();
   }
 
   getFormattedDate(buyDate: string) {

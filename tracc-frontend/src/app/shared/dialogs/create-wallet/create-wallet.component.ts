@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -18,7 +18,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
 import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
@@ -41,10 +41,11 @@ import { Wallet } from '../../types';
   templateUrl: './create-wallet.component.html',
   styleUrl: './create-wallet.component.scss',
 })
-export class CreateWalletComponent {
+export class CreateWalletComponent implements OnInit, OnDestroy {
   newWalletForm!: FormGroup;
   error!: string;
   isLoading!: boolean;
+  walletStoreSub!: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -59,7 +60,7 @@ export class CreateWalletComponent {
       description: this.wallet?.description || '',
     });
 
-    this.store.select('wallets').subscribe((state) => {
+    this.walletStoreSub = this.store.select('wallets').subscribe((state) => {
       this.error = state.walletError;
 
       if (!this.error && this.isLoading === true && state.loading === false) {
@@ -69,6 +70,10 @@ export class CreateWalletComponent {
         this.isLoading = state.loading;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.walletStoreSub.unsubscribe();
   }
 
   onSubmit(form: FormGroup) {
