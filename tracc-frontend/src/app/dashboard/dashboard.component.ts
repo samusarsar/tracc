@@ -1,17 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { take } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
 import { UserData } from '../shared/types';
 import { DashboardHomeComponent } from './dashboard-home/dashboard-home.component';
-import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router,
-  RouterModule,
-} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,14 +25,11 @@ export class DashboardComponent {
   user!: UserData;
   heading!: string;
 
-  constructor(
-    private store: Store<fromApp.AppState>,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.activatedRoute.data.subscribe((res) => {
-      this.user = res['user'];
-    });
+  constructor(private store: Store<fromApp.AppState>, private router: Router) {
+    this.store
+      .select('auth')
+      .pipe(take(1))
+      .subscribe((state) => (this.user = state.user!));
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

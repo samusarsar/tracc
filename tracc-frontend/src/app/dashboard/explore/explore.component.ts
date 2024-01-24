@@ -33,7 +33,6 @@ export class ExploreComponent {
 
   ngOnInit() {
     this.activatedRoute.parent?.data.subscribe((res) => {
-      console.log(res);
       this.coins = res['coins']['all'];
       this.filteredCoins = this.coins;
     });
