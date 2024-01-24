@@ -17,6 +17,10 @@ const TransactionSchema = new mongoose.Schema(
         buyAmount: {
             type: Number,
             require: true
+        },
+        buyDate: {
+            type: Date,
+            require: true
         }
     },
     { timestamps: true }
