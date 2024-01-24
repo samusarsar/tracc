@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
 
 import * as fromApp from '../../../store/app.reducer';
+import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
 import { Coin, Transaction, Wallet } from '../../types';
 import { CreateTransactionComponent } from '../create-transaction/create-transaction.component';
 
@@ -110,9 +111,21 @@ export class WalletDetailsComponent implements OnInit {
   }
 
   addTransaction() {
-    this.dialog.open(CreateTransactionComponent, { data: {
-      wallet: this.wallet,
-      coins: this.data.coins
-    }, injector: this.injector });
+    this.dialog.open(CreateTransactionComponent, {
+      data: {
+        wallet: this.wallet,
+        coins: this.data.coins,
+      },
+      injector: this.injector,
+    });
+  }
+
+  deleteTransaction(id: string) {
+    this.store.dispatch(
+      WalletsActions.deleteTransactionStart({
+        walletId: this.data.walletId,
+        transactionId: id,
+      })
+    );
   }
 }
