@@ -6,7 +6,7 @@ export const apiRoutes = {
   GET_WALLETS(email: string) {
     return `/wallets/${email}`;
   },
-  DELETE_WALLET(id: string) {
+  WALLET_ID_REQUESTS(id: string) {
     return `/wallets/${id}`;
   },
 };

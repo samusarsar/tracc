@@ -47,3 +47,21 @@ export const deleteWalletSuccess = createAction(
     id: string;
   }>()
 );
+
+export const editWalletStart = createAction(
+  '[Wallets] Edit Wallet Start',
+  props<{
+    id: string;
+    name: string;
+    description: string;
+  }>()
+);
+
+export const editWalletSuccess = createAction(
+  '[Wallets] Edit Wallet Success',
+  props<{
+    id: string;
+    name: string;
+    description: string;
+  }>()
+);

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
+  MAT_DIALOG_DATA,
   MatDialog,
   MatDialogActions,
   MatDialogClose,
@@ -17,10 +18,11 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
 import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
+import { Wallet } from '../../types';
 
 @Component({
   selector: 'app-create-wallet',
@@ -44,21 +46,20 @@ export class CreateWalletComponent {
   error!: string;
   isLoading!: boolean;
 
-  private walletsStoreSub!: Subscription;
-
   constructor(
     private fb: FormBuilder,
     private store: Store<fromApp.AppState>,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public wallet: Wallet
   ) {}
 
   ngOnInit() {
     this.newWalletForm = this.fb.group({
-      name: ['', Validators.required],
-      description: '',
+      name: [this.wallet?.name || '', Validators.required],
+      description: this.wallet?.description || '',
     });
 
-    this.walletsStoreSub = this.store.select('wallets').subscribe((state) => {
+    this.store.select('wallets').subscribe((state) => {
       this.error = state.walletError;
 
       if (!this.error && this.isLoading === true && state.loading === false) {
@@ -77,13 +78,23 @@ export class CreateWalletComponent {
       .select('auth')
       .pipe(take(1))
       .subscribe((state) => {
-        this.store.dispatch(
-          WalletsActions.createWalletStart({
-            name: form.value.name,
-            description: form.value.description,
-            owner: state.user!.email,
-          })
-        );
+        if (!this.wallet) {
+          this.store.dispatch(
+            WalletsActions.createWalletStart({
+              name: form.value.name,
+              description: form.value.description,
+              owner: state.user!.email,
+            })
+          );
+        } else {
+          this.store.dispatch(
+            WalletsActions.editWalletStart({
+              id: this.wallet.id,
+              name: form.value.name,
+              description: form.value.description,
+            })
+          );
+        }
       });
   }
 }

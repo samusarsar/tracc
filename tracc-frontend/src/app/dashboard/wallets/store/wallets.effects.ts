@@ -67,11 +67,40 @@ export class WalletsEffects {
       ofType(WalletsActions.deleteWalletStart),
       switchMap((deleteAction) => {
         return this.http
-          .delete(apiRoutes.BASE + apiRoutes.DELETE_WALLET(deleteAction.id))
+          .delete(
+            apiRoutes.BASE + apiRoutes.WALLET_ID_REQUESTS(deleteAction.id)
+          )
           .pipe(
             map(() => {
               return WalletsActions.deleteWalletSuccess({
                 id: deleteAction.id,
+              });
+            }),
+            catchError((error) => {
+              return of(
+                WalletsActions.walletsFail({ error: error.error.message })
+              );
+            })
+          );
+      })
+    );
+  });
+
+  editWallet = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(WalletsActions.editWalletStart),
+      switchMap((editAction) => {
+        return this.http
+          .patch(apiRoutes.BASE + apiRoutes.WALLET_ID_REQUESTS(editAction.id), {
+            name: editAction.name,
+            description: editAction.description,
+          })
+          .pipe(
+            map(() => {
+              return WalletsActions.editWalletSuccess({
+                id: editAction.id,
+                name: editAction.name,
+                description: editAction.description,
               });
             }),
             catchError((error) => {

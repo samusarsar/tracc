@@ -1,5 +1,7 @@
 <form [formGroup]="newWalletForm" (ngSubmit)="onSubmit(newWalletForm)">
-  <h1 mat-dialog-title>Create a new wallet</h1>
+  <h1 mat-dialog-title>
+    {{ wallet ? "Edit your wallet" : "Create a new wallet" }}
+  </h1>
   <div mat-dialog-content style="padding-bottom: 0">
     <mat-form-field class="w-full">
       <mat-label>Name</mat-label>
@@ -28,7 +30,7 @@
         type="submit"
         [disabled]="isLoading"
       >
-        Create
+        {{ wallet ? "Edit" : "Create" }}
       </button>
       <button mat-button mat-dialog-close>Close</button>
     </div>
