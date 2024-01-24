@@ -1,14 +1,11 @@
 <mat-card matRipple class="hover:scale-105 transition">
-  <mat-card-header>
+  <mat-card-header style="padding-bottom: 10px">
     <mat-card-title>{{ wallet.name }}</mat-card-title>
     <mat-card-subtitle>{{ wallet.description }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <!-- <div class="grid grid-cols-2 gap-1 p-2 overflow-clip place-items-start"> -->
-    <!-- @for (transaction of wallet.transactions; track transaction.id) {
-      <p class="text-md">{{ transaction.coinId }}</p>
-      <p class="text-md font-semibold">{{ getTransactionPNL(transaction) }}%</p>
-      } -->
+    <mat-divider></mat-divider>
+    @if (wallet.transactions.length) {
     <table mat-table [dataSource]="wallet.transactions.slice(0, 3)">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef>Coin</th>
@@ -58,23 +55,34 @@
       <tr mat-footer-row *matFooterRowDef="['disclaimer']"></tr>
       }
     </table>
-    <!-- </div> -->
+    } @else {
+    <div class="flex flex-col py-4 gap-1">
+      <p>This wallet is empty.</p>
+      <p class="font-semibold">Click to add transactions...</p>
+    </div>
+    }
   </mat-card-content>
   <mat-card-footer>
     <div
       [class]="
         'flex justify-between items-center p-2 px-8 ' +
-        (getWalletPNL().percentage < 0 ? 'bg-red-500' : 'bg-green-500')
+        (getWalletPNL().percentage < 0
+          ? 'bg-red-500'
+          : getWalletPNL().percentage > 0
+          ? 'bg-green-500'
+          : 'bg-gray-500')
       "
     >
       <p class="text-lg font-semibold" style="margin-bottom: 0">
         {{ getWalletPNL().percentage.toFixed(2) }}%
       </p>
-      <mat-icon
-        >keyboard_arrow_{{
-          getWalletPNL().percentage < 0 ? "down" : "up"
-        }}</mat-icon
-      >
+      <mat-icon>{{
+        getWalletPNL().percentage < 0
+          ? "keyboard_arrow_down"
+          : getWalletPNL().percentage > 0
+          ? "keyboard_arrow_up"
+          : "remove"
+      }}</mat-icon>
       <p class="text-lg font-semibold" style="margin-bottom: 0">
         ${{ getWalletPNL().nominal.toFixed(2) }}
       </p>

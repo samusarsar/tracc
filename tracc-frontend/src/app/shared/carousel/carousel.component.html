@@ -1,5 +1,5 @@
 <div #carousel class="flex overflow-hidden gap-4 p-4">
-  @if (!wallets) { @for (coin of coins; track coin.id) {
+  @if (type === 'coins') { @for (coin of coins; track coin.id) {
   <div class="min-w-[300px]">
     <app-coin-card [coin]="coin"></app-coin-card>
   </div>

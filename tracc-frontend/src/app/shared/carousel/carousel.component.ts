@@ -28,6 +28,7 @@ import { WalletCardComponent } from '../wallet-card/wallet-card.component';
 export class CarouselComponent implements AfterViewInit {
   @Input() coins!: Coin[];
   @Input() wallets!: Wallet[];
+  @Input() type: 'coins' | 'wallets' = 'coins';
   @ViewChild('carousel', { static: false }) carousel!: ElementRef;
 
   scrollLeft = 0;

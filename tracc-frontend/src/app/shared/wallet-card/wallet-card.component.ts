@@ -3,13 +3,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatRippleModule } from '@angular/material/core';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { Coin, Transaction, Wallet } from '../types';
 
 @Component({
   selector: 'app-wallet-card',
   standalone: true,
-  imports: [MatCardModule, MatIconModule, MatTableModule, MatRippleModule],
+  imports: [MatCardModule, MatIconModule, MatTableModule, MatRippleModule, MatDividerModule],
   templateUrl: './wallet-card.component.html',
   styleUrl: './wallet-card.component.scss',
 })
