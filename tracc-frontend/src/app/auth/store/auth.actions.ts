@@ -35,4 +35,4 @@ export const signupStart = createAction(
 
 export const autoLogin = createAction('[Auth] Auto Login');
 
-export const clearError = createAction('[Auth] Clear Error');
+export const clear = createAction('[Auth] Clear');

@@ -1,11 +1,11 @@
-import { CanActivateChildFn, Router } from '@angular/router';
+import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { inject } from '@angular/core';
 import { map, take } from 'rxjs';
 
 import * as fromApp from '../store/app.reducer';
 
-export const authGuard: CanActivateChildFn = (route, state) => {
+export const authGuard: CanActivateFn = (route, state) => {
   const store = inject(Store<fromApp.AppState>);
   const router = inject(Router);
 

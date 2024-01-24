@@ -128,9 +128,7 @@ export class AuthEffects {
         const user = JSON.parse(localStorage.getItem('tracc-user') || 'null');
 
         if (!user || !user?.token) {
-          return {
-            type: 'NO AUTO-LOGIN',
-          };
+          return AuthActions.clear();
         }
 
         return AuthActions.authSuccess({

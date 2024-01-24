@@ -1,6 +1,14 @@
 <main class="main">
+  @if (!isLoading) {
   <app-sidenav [user]="user">
     <app-navbar #navbar [user]="user"></app-navbar>
-    <router-outlet></router-outlet>
-  </app-sidenav>
+    <router-outlet></router-outlet> </app-sidenav
+  >} @else {
+  <div class="bg-[#303030] flex w-full h-full justify-center items-center">
+    <mat-spinner
+      [mode]="'determinate'"
+      [value]="getRandomProgress()"
+    ></mat-spinner>
+  </div>
+  }
 </main>

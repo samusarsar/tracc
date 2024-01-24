@@ -12,7 +12,7 @@ export interface State {
 const initialState: State = {
   user: null,
   authError: '',
-  loading: false,
+  loading: true,
 };
 
 export const authReducer = createReducer(
@@ -56,6 +56,21 @@ export const authReducer = createReducer(
       ...state,
       authError: '',
       loading: true,
+    };
+  }),
+  on(AuthActions.autoLogin, (state) => {
+    return {
+      ...state,
+      authError: '',
+      loading: true,
+    };
+  }),
+  on(AuthActions.clear, (state) => {
+    return {
+      ...state,
+      user: null,
+      authError: '',
+      loading: false,
     };
   })
 );
