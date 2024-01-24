@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -22,14 +30,18 @@ import { UserData } from './shared/types';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked {
   title = 'tracc';
 
   user!: UserData | null;
   isLoading = true;
 
-  constructor(private store: Store<fromApp.AppState>) {}
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.store.dispatch(AuthActions.autoLogin());
@@ -37,6 +49,10 @@ export class AppComponent implements OnInit {
       this.user = state.user;
       this.isLoading = state.loading;
     });
+  }
+
+  ngAfterViewChecked() {
+    this.cdr.detectChanges();
   }
 
   getRandomProgress() {

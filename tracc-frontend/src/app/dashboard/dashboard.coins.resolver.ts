@@ -3,10 +3,23 @@ import { inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { coinApiEndpoints } from '../environments/environment';
-import { of } from 'rxjs';
+import { map, of } from 'rxjs';
+import { Coin } from '../shared/types';
 
 export const dashboardCoinsResolver: ResolveFn<Object> = () => {
-  // const allCoins = inject(HttpClient).get(coinApiEndpoints.MARKET_TOP_100);
+  // return inject(HttpClient).get<Coin[]>(coinApiEndpoints.MARKET_TOP_100).pipe(
+  //   map(coins => {
+  //     return {
+  //       all: coins,
+  //       top: coins.slice(0, 6),
+  //       trending: coins
+  //         .sort(
+  //           (a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h
+  //         )
+  //         .slice(0, 6),
+  //     };
+  //   })
+  // );
 
   // mock allCoins
   const allCoins = [
