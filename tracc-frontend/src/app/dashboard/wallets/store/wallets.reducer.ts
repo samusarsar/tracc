@@ -53,5 +53,20 @@ export const walletsReducer = createReducer(
       walletError: action.error,
       loading: false,
     };
+  }),
+  on(WalletsActions.deleteWalletStart, (state) => {
+    return {
+      ...state,
+      walletError: '',
+      loading: true,
+    };
+  }),
+  on(WalletsActions.deleteWalletSuccess, (state, action) => {
+    return {
+      ...state,
+      wallets: state.wallets.filter((w) => w.id !== action.id),
+      walletError: '',
+      loading: false,
+    };
   })
 );

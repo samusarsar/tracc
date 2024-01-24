@@ -3,7 +3,12 @@ export const apiRoutes = {
   SIGNUP: '/auth/signup',
   LOGIN: '/auth/login',
   CREATE_WALLET: '/wallets/create',
-  GET_WALLETS: '/wallets',
+  GET_WALLETS(email: string) {
+    return `/wallets/${email}`;
+  },
+  DELETE_WALLET(id: string) {
+    return `/wallets/${id}`;
+  },
 };
 
 export const coinApiEndpoints = {

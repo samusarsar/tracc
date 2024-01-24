@@ -33,3 +33,17 @@ export const walletsFail = createAction(
     error: string;
   }>()
 );
+
+export const deleteWalletStart = createAction(
+  '[Wallets] Delete Wallet Start',
+  props<{
+    id: string;
+  }>()
+);
+
+export const deleteWalletSuccess = createAction(
+  '[Wallets] Delete Wallet Success',
+  props<{
+    id: string;
+  }>()
+);

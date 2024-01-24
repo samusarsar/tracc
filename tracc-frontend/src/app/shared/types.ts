@@ -33,6 +33,7 @@ export type Transaction = {
 
 export type Wallet = {
   id: string;
+  _id: string;
   name: string;
   description: string;
   owner: string;
