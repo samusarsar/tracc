@@ -25,7 +25,13 @@
     <div class="p-3 rounded bg-[#212121] w-fit flex items-center shadow-lg">
       <p class="text-3xl" style="margin-bottom: 0">My Wallets:</p>
     </div>
-    <button mat-raised-button (click)="onNavigate('wallets')">View all</button>
+    <button mat-raised-button (click)="onNavigate('wallets')">
+      {{ wallets ? "View all" : "Create" }}
+    </button>
   </div>
-  <app-carousel [coins]="allCoins" [wallets]="wallets"></app-carousel>
+  <app-carousel
+    [coins]="allCoins"
+    [wallets]="wallets"
+    [type]="'wallets'"
+  ></app-carousel>
 </section>

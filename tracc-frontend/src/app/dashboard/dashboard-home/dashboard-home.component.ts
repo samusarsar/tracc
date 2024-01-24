@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Coin } from '../../shared/types';
+import { Coin, Wallet } from '../../shared/types';
 import { CarouselComponent } from '../../shared/carousel/carousel.component';
 import * as fromApp from '../../store/app.reducer';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -18,82 +18,23 @@ export class DashboardHomeComponent implements OnInit {
   topCoins!: Coin[];
   trendingCoins!: Coin[];
   allCoins!: Coin[];
-  wallets = [
-    {
-      id: 'sdad1',
-      name: 'My Wallet',
-      description: 'This is my wallet',
-      transactions: [
-        {
-          id: '1',
-          coinId: 'bitcoin',
-          buyPrice: 80000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          coinId: 'bitcoin',
-          buyPrice: 40000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-      ],
-      createdAt: new Date(),
-    },
-    {
-      id: 'sdad1',
-      name: 'My Wallet',
-      description: 'This is my wallet',
-      transactions: [
-        {
-          id: '1',
-          coinId: 'bitcoin',
-          buyPrice: 80000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          coinId: 'bitcoin',
-          buyPrice: 40000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-      ],
-      createdAt: new Date(),
-    },
-    {
-      id: 'sdad1',
-      name: 'My Wallet',
-      description: 'This is my wallet',
-      transactions: [
-        {
-          id: '1',
-          coinId: 'bitcoin',
-          buyPrice: 80000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-        {
-          id: '2',
-          coinId: 'bitcoin',
-          buyPrice: 40000,
-          buyAmount: 1,
-          createdAt: new Date(),
-        },
-      ],
-      createdAt: new Date(),
-    },
-  ];
+  wallets!: Wallet[];
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((res) => {
       this.topCoins = res['coins']['top'];
       this.trendingCoins = res['coins']['trending'];
       this.allCoins = res['coins']['all'];
+    });
+
+    this.store.select('wallets').subscribe((state) => {
+      this.wallets = state.wallets;
     });
   }
 

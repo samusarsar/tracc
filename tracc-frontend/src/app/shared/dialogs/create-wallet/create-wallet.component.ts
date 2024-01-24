@@ -17,7 +17,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
 import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
@@ -73,11 +73,17 @@ export class CreateWalletComponent {
   onSubmit(form: FormGroup) {
     if (form.status === 'INVALID' || !form.touched) return;
 
-    this.store.dispatch(
-      WalletsActions.createWalletStart({
-        name: form.value.name,
-        description: form.value.description,
-      })
-    );
+    this.store
+      .select('auth')
+      .pipe(take(1))
+      .subscribe((state) => {
+        this.store.dispatch(
+          WalletsActions.createWalletStart({
+            name: form.value.name,
+            description: form.value.description,
+            owner: state.user!.email,
+          })
+        );
+      });
   }
 }
