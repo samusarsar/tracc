@@ -112,6 +112,8 @@ export const deleteTransaction = async (
             { new: true }
         )
 
+        console.log(updatedWallet)
+
         res.status(200).json(updatedWallet)
     } catch (error) {
         next(error)
