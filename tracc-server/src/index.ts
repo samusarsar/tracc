@@ -24,16 +24,12 @@ const connectDB = () => {
 
 app.use(
     cors({
-        origin: '*',
+        origin: 'https://tracc-flame.vercel.app',
         credentials: true
     })
 )
 app.use(cookieParser())
 app.use(express.json())
-
-app.get('/api', (req: Request, res: Response) => {
-    res.status(201).json({ message: 'Welcome to Tracc Server' })
-})
 
 app.use('/api/auth', authRoutes)
 app.use('/api/wallets', walletsRoutes)
@@ -53,3 +49,5 @@ app.listen(8080, () => {
     connectDB()
     console.log('Server is running on port 8080')
 })
+
+export default app
