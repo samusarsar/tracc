@@ -18,10 +18,14 @@
       <p class="text-md">Market Cap:</p>
       <p class="text-md font-semibold">${{ coin.market_cap }}</p>
       <p class="text-md">Total Supply:</p>
-      <p class="text-md font-semibold">${{ coin.total_supply.toFixed(2) }}</p>
+      <p class="text-md font-semibold">
+        ${{ coin.total_supply ? coin.total_supply.toFixed(2) : "-" }}
+      </p>
       <p class="text-md">Circulating Supply:</p>
       <p class="text-md font-semibold">
-        ${{ coin.circulating_supply.toFixed(2) }}
+        ${{
+          coin.circulating_supply ? coin.circulating_supply.toFixed(2) : "-"
+        }}
       </p>
     </div>
   </mat-card-content>
