@@ -63,7 +63,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-      this.walletStoreSub.unsubscribe();
+    this.walletStoreSub.unsubscribe();
   }
 
   getFormattedDate(buyDate: string) {
@@ -125,6 +125,7 @@ export class WalletDetailsComponent implements OnInit, OnDestroy {
         coins: this.data.coins,
       },
       injector: this.injector,
+      autoFocus: false,
     });
   }
 

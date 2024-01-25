@@ -27,7 +27,7 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #userMenu="matMenu">
-    <button mat-menu-item disableRipple disabled>
+    <div class="p-4 pb-2 text-[#ffffff]">
       <div class="flex flex-col">
         <p>
           Name: <b>{{ user.name }}</b>
@@ -36,8 +36,8 @@
           Email: <b>{{ user.email }}</b>
         </p>
       </div>
-    </button>
-    <div class="px-4 flex w-full justify-center">
+    </div>
+    <div class="px-4 pb-2 flex w-full justify-center">
       <button mat-raised-button color="warn" (click)="onLogout()">
         LOGOUT
       </button>

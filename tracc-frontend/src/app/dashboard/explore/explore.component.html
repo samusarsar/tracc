@@ -12,7 +12,7 @@
 </div>
 <div class="p-4 pt-0 flex justify-center gap-4 flex-wrap">
   @for(coin of filteredCoins; track coin.id) {
-  <div class="min-w-[300px]">
+  <div class="w-[300px]">
     <app-coin-card [coin]="coin"></app-coin-card>
   </div>
   }

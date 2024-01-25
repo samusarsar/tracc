@@ -43,6 +43,8 @@ export class WalletsComponent implements OnInit, OnDestroy {
   }
 
   onOpenDialog() {
-    this.dialog.open(CreateWalletComponent);
+    this.dialog.open(CreateWalletComponent, {
+      autoFocus: false,
+    });
   }
 }

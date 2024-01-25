@@ -87,11 +87,15 @@ export class WalletCardComponent {
         walletId: this.wallet.id,
         coins: this.coins,
       },
+      autoFocus: false,
     });
   }
 
   onEdit() {
-    this.dialog.open(CreateWalletComponent, { data: this.wallet });
+    this.dialog.open(CreateWalletComponent, {
+      data: this.wallet,
+      autoFocus: false,
+    });
   }
 
   onDelete() {
