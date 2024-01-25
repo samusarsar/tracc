@@ -71,20 +71,12 @@
         mat-row
         *matRowDef="let row; columns: ['position', 'pnlp', 'pnln']"
       ></tr>
-
-      @if (wallet.transactions.length > 3) {
-      <ng-container matColumnDef="disclaimer">
-        <td mat-footer-cell *matFooterCellDef colspan="3">
-          <div class="flex justify-center items-center">
-            <button mat-flat-button>Click to view all</button>
-          </div>
-        </td>
-      </ng-container>
-
-      <tr mat-footer-row *matFooterRowDef="['disclaimer']"></tr>
-      }
     </table>
-    } @else {
+    @if (wallet.transactions.length > 3) {
+    <div class="px-2 pt-1 pb-4 flex justify-center items-center">
+      <button mat-flat-button>Click to view all</button>
+    </div>
+    } } @else {
     <div class="p-4 flex justify-center items-center">
       <button mat-flat-button>Click to add transactions</button>
     </div>
