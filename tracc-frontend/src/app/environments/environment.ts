@@ -1,5 +1,5 @@
 export const apiRoutes = {
-  BASE: 'tracc-server.vercel.app/api',
+  BASE: 'https://tracc-server.vercel.app/api',
   SIGNUP: '/auth/signup',
   LOGIN: '/auth/login',
   CREATE_WALLET: '/wallets/create',

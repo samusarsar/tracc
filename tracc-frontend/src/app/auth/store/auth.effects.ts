@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -8,8 +8,9 @@ import Cookies from 'js-cookie';
 import * as AuthActions from './auth.actions';
 import { apiRoutes } from '../../environments/environment';
 import { AuthResponse } from '../../shared/types';
+import { isPlatformBrowser } from '@angular/common';
 
-const handleAuthSuccess = (res: AuthResponse) => {
+const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
   const { access_token } = Cookies.get();
 
   if (!access_token)
@@ -22,7 +23,9 @@ const handleAuthSuccess = (res: AuthResponse) => {
     token: access_token,
   };
 
-  localStorage.setItem('tracc-user', JSON.stringify(user));
+  if (isPlatformBrowser(platformId)) {
+    localStorage.setItem('tracc-user', JSON.stringify(user));
+  }
 
   return AuthActions.authSuccess({
     ...user,
@@ -35,7 +38,8 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private readonly platformId: any
   ) {}
 
   authSignup = createEffect(() => {
@@ -56,7 +60,7 @@ export class AuthEffects {
           )
           .pipe(
             map((res) => {
-              return handleAuthSuccess(res);
+              return handleAuthSuccess(res, this.platformId);
             }),
             catchError((error) => {
               return of(AuthActions.authFail({ error: error.error.message }));
@@ -83,7 +87,7 @@ export class AuthEffects {
           )
           .pipe(
             map((res) => {
-              return handleAuthSuccess(res);
+              return handleAuthSuccess(res, this.platformId);
             }),
             catchError((error) => {
               return of(AuthActions.authFail({ error: error.error.message }));
@@ -99,7 +103,9 @@ export class AuthEffects {
         ofType(AuthActions.logout),
         map(() => {
           Cookies.remove('access_token');
-          localStorage.removeItem('tracc-user');
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.removeItem('tracc-user');
+          }
           this.router.navigate(['/']);
         })
       );
@@ -125,7 +131,9 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.autoLogin),
       map(() => {
-        const user = JSON.parse(localStorage.getItem('tracc-user') || 'null');
+        const user = isPlatformBrowser(this.platformId)
+          ? JSON.parse(localStorage.getItem('tracc-user') || 'null')
+          : null;
 
         if (!user || !user?.token) {
           return AuthActions.clear();
