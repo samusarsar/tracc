@@ -5,8 +5,8 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 
-import walletsRoutes from './routes/wallets'
-import authRoutes from './routes/auth'
+import walletsRoutes from '../routes/wallets'
+import authRoutes from '../routes/auth'
 
 const app = express()
 dotenv.config()
