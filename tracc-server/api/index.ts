@@ -24,7 +24,7 @@ const connectDB = () => {
 
 app.use(
     cors({
-        origin: 'https://tracc-flame.vercel.app/',
+        origin: '*',
         credentials: true
     })
 )
