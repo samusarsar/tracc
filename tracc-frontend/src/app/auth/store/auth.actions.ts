@@ -7,7 +7,7 @@ export const authSuccess = createAction(
     email: string;
     name: string;
     redirect?: boolean;
-    token: string;
+    token: string | undefined;
   }>()
 );
 

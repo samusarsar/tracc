@@ -1,24 +1,17 @@
-import { Inject, Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import Cookies from 'js-cookie';
+import { isPlatformBrowser } from '@angular/common';
 
 import * as AuthActions from './auth.actions';
 import { apiRoutes } from '../../environments/environment';
 import { AuthResponse } from '../../shared/types';
-import { isPlatformBrowser } from '@angular/common';
 
 const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
   const { access_token } = Cookies.get();
-
-  console.log('Res:', res);
-  console.log('Cookies:', Cookies.get());
-  console.log('Access Token:', access_token);
-
-  if (!access_token)
-    return AuthActions.authFail({ error: 'Could not verify token.' });
 
   const user = {
     id: res._id,
