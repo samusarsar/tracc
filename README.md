@@ -32,6 +32,13 @@
     -   To access any page apart from the landing page, users must be authenticated.
 -   **Happy crypto adventures with `Tracc`** ;)
 
+## <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="5 3 19 12 5 21 5 3"/></svg> Getting Started
+
+### Visit site on Vercel-Hosted address:
+
+1. Visit the [Tracc _vercel-hosted website_](https://tracc-flame.vercel.app/);
+2. Enjoy `Tracc`!
+
 ## <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-network"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></svg> Community and Contributions
 
 The `Tracc` platform is developed by **samu.sar**. The up-to-date crypto coin information is being provided by **CoinGecko**'s free-tier API.
