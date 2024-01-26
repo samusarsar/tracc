@@ -4,11 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import Cookies from 'js-cookie';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, isPlatformServer } from '@angular/common';
 
 import * as AuthActions from './auth.actions';
 import { apiRoutes } from '../../environments/environment';
-import { AuthResponse } from '../../shared/types';
+import { AuthResponse, UserData } from '../../shared/types';
 
 const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
   const { access_token } = Cookies.get();
@@ -22,6 +22,8 @@ const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
 
   if (isPlatformBrowser(platformId)) {
     localStorage.setItem('tracc-user', JSON.stringify(user));
+  } else if (isPlatformServer(platformId)) {
+    (global as any)['tracc-user'] = user;
   }
 
   return AuthActions.authSuccess({
@@ -102,6 +104,8 @@ export class AuthEffects {
           Cookies.remove('access_token');
           if (isPlatformBrowser(this.platformId)) {
             localStorage.removeItem('tracc-user');
+          } else if (isPlatformServer(this.platformId)) {
+            (global as any)['tracc-user'] = null;
           }
           this.router.navigate(['/']);
         })
@@ -128,9 +132,13 @@ export class AuthEffects {
     return this.actions$.pipe(
       ofType(AuthActions.autoLogin),
       map(() => {
-        const user = isPlatformBrowser(this.platformId)
-          ? JSON.parse(localStorage.getItem('tracc-user') || 'null')
-          : null;
+        let user: UserData | null = null;
+
+        if (isPlatformBrowser(this.platformId)) {
+          user = JSON.parse(localStorage.getItem('tracc-user') || 'null');
+        } else if (isPlatformServer(this.platformId)) {
+          user = (global as any)['tracc-user'] || null;
+        }
 
         if (!user || !user?.token) {
           return AuthActions.clear();
