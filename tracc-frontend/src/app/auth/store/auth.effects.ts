@@ -13,6 +13,10 @@ import { isPlatformBrowser } from '@angular/common';
 const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
   const { access_token } = Cookies.get();
 
+  console.log('Res:', res);
+  console.log('Cookies:', Cookies.get());
+  console.log('Access Token:', access_token);
+
   if (!access_token)
     return AuthActions.authFail({ error: 'Could not verify token.' });
 
