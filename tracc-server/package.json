@@ -4,21 +4,14 @@
     "private": true,
     "main": "index.js",
     "scripts": {
-        "start": "nodemon src/index.ts",
+        "start": "nodemon src/app.ts",
         "format:check": "prettier --check .",
         "format:write": "prettier --write .",
         "lint:check": "eslint .",
         "lint:fix": "eslint --fix .",
-        "build": "rimraf dist && tsc",
-        "ts.check": "tsc --project tsconfig.json",
-        "add-build": "git add dist",
+        "build": "tsc",
         "vercel-build": "echo hello"
     },
-    "pre-commit": [
-        "ts.check",
-        "build",
-        "add-build"
-    ],
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "cookie-parser": "~1.4.4",
@@ -46,9 +39,7 @@
         "eslint-plugin-import": "^2.29.1",
         "eslint-plugin-n": "^16.6.2",
         "eslint-plugin-promise": "^6.1.1",
-        "pre-commit": "^1.2.2",
         "prettier": "^3.2.3",
-        "rimraf": "^5.0.5",
         "ts-node": "^10.9.2",
         "typescript": "^5.3.3"
     }

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 
 import User from '../models/User'
 import { UserDocument } from '../common/types'
+import { connectDB } from '../app'
 
 export const signup = async (
     req: Request,
@@ -12,6 +13,8 @@ export const signup = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const existingUser = (await User.findOne({
             email: req.body.email
         })) as UserDocument
@@ -36,6 +39,8 @@ export const login = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const existingUser = (await User.findOne({
             email: req.body.email
         })) as UserDocument

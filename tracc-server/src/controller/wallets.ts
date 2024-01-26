@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 
 import Wallet from '../models/Wallet'
+import { connectDB } from '../app'
 
 export const getWallets = async (
     req: Request,
@@ -8,6 +9,8 @@ export const getWallets = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const wallets = await Wallet.find({
             owner: req.params.email
         })
@@ -24,6 +27,8 @@ export const createWallet = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const newWallet = await Wallet.create(req.body)
 
         res.status(200).json(newWallet)
@@ -38,6 +43,8 @@ export const editWallet = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const updatedWallet = await Wallet.findOneAndUpdate(
             {
                 _id: req.params.id
@@ -58,6 +65,8 @@ export const deleteWallet = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         await Wallet.deleteOne({
             _id: req.params.id
         })
@@ -74,6 +83,8 @@ export const addTransaction = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const updatedWallet = await Wallet.findOneAndUpdate(
             {
                 _id: req.params.id
@@ -98,6 +109,8 @@ export const deleteTransaction = async (
     next: NextFunction
 ) => {
     try {
+        connectDB()
+
         const updatedWallet = await Wallet.findOneAndUpdate(
             {
                 _id: req.params.id

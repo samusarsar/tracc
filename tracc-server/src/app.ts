@@ -11,7 +11,7 @@ import authRoutes from './routes/auth'
 const app = express()
 dotenv.config()
 
-const connectDB = () => {
+export const connectDB = () => {
     mongoose
         .connect(process.env.DATABASE_URL)
         .then(() => {
@@ -31,6 +31,9 @@ app.use(
 app.use(cookieParser())
 app.use(express.json())
 
+app.get('/', (req: Request, res: Response) => {
+    return res.status(200).json('Welcome to Tracc Server!')
+})
 app.use('/api/auth', authRoutes)
 app.use('/api/wallets', walletsRoutes)
 
