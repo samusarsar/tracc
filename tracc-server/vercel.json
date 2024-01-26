@@ -7,7 +7,10 @@
                     "key": "Access-Control-Allow-Credentials",
                     "value": "https://tracc-flame.vercel.app"
                 },
-                { "key": "Access-Control-Allow-Origin", "value": "*" },
+                {
+                    "key": "Access-Control-Allow-Origin",
+                    "value": "https://tracc-flame.vercel.app"
+                },
                 {
                     "key": "Access-Control-Allow-Methods",
                     "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT"
