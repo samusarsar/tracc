@@ -20,10 +20,8 @@ const handleAuthSuccess = (res: AuthResponse, platformId: any) => {
     token: access_token,
   };
 
-  if (isPlatformBrowser(platformId)) {
+  if (window?.localStorage) {
     localStorage.setItem('tracc-user', JSON.stringify(user));
-  } else if (isPlatformServer(platformId)) {
-    (global as any)['tracc-user'] = user;
   }
 
   return AuthActions.authSuccess({
@@ -102,10 +100,8 @@ export class AuthEffects {
         ofType(AuthActions.logout),
         map(() => {
           Cookies.remove('access_token');
-          if (isPlatformBrowser(this.platformId)) {
+          if (window?.localStorage) {
             localStorage.removeItem('tracc-user');
-          } else if (isPlatformServer(this.platformId)) {
-            (global as any)['tracc-user'] = null;
           }
           this.router.navigate(['/']);
         })
@@ -134,10 +130,8 @@ export class AuthEffects {
       map(() => {
         let user: UserData | null = null;
 
-        if (isPlatformBrowser(this.platformId)) {
+        if (window?.localStorage) {
           user = JSON.parse(localStorage.getItem('tracc-user') || 'null');
-        } else if (isPlatformServer(this.platformId)) {
-          user = (global as any)['tracc-user'] || null;
         }
 
         if (!user || !user?.token) {
