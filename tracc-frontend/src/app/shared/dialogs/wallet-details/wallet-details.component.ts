@@ -16,12 +16,12 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips';
+import { Subscription } from 'rxjs';
 
 import * as fromApp from '../../../store/app.reducer';
 import * as WalletsActions from '../../../dashboard/wallets/store/wallets.actions';
 import { Coin, Transaction, Wallet } from '../../types';
 import { CreateTransactionComponent } from '../create-transaction/create-transaction.component';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-wallet-details',

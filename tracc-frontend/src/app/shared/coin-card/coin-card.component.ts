@@ -4,9 +4,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatRippleModule } from '@angular/material/core';
 import { UpperCasePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { Router } from '@angular/router';
 
 import { Coin } from '../../shared/types';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coin-card',

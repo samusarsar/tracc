@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
 import { MatCardModule } from '@angular/material/card';
 
 @Component({

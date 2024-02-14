@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, take } from 'rxjs';
 
 import { Coin, Wallet } from '../../shared/types';
 import { CarouselComponent } from '../../shared/carousel/carousel.component';
 import * as fromApp from '../../store/app.reducer';
-import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-home',

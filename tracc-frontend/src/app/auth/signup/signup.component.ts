@@ -7,18 +7,17 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 import * as fromApp from '../../store/app.reducer';
 import * as AuthActions from '../store/auth.actions';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
